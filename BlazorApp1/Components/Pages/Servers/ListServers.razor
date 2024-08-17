@@ -1,0 +1,47 @@
+@page "/Servers"
+@using BlazorApp1.Models
+<h3>ListServers</h3>
+
+  
+<div class="container" style="display:inline-block;">
+    @foreach (var city in Servers.DistinctBy(a=>a.City))
+    {
+    <Card Class="mb-4" Style="width:8rem; height:10rem;">
+        <img class="rounded-top" Style="width:7rem; height:5rem;" src="images/@GetFile(city.City.ToLower())" alt="placeholder"/>
+        <CardBody>
+            <Button Color="ButtonColor.Primary" To="#" Type="ButtonType.Button">@city.City</Button>
+        </CardBody>
+    </Card>
+    }
+</div>
+
+
+<div>
+    <ul>
+        @foreach (var server in Servers)
+        {
+            <li class="p-1">
+                @server.Name in @server.City is <span style="color:@(server.IsOnline ? "green":"red")">@(server.IsOnline ? "Online":"Offline")</span>
+                <a href="/servers/@server.Id" ><Button Color="ButtonColor.Warning"> Edit</Button></a>    
+            </li>
+        }
+    </ul>
+</div>
+
+
+
+
+
+
+
+
+@code {
+
+
+    private List<Server> Servers { get; set; } = ServersRepository.GetServres();
+
+
+    private string GetFile(string city) 
+        => city + ".png";
+
+}   

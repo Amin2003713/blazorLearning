@@ -1,0 +1,90 @@
+@page "/servers/{Id:int}"
+
+<h3>Edit Server</h3>
+
+@if (Server is not null)
+{
+    <EditForm Model="Server" OnValidSubmit="HandleSubmit" FormName="ServerEdit">
+        <DataAnnotationsValidator/>
+        <ValidationSummary/>
+        <div class="card mb-3">
+            <div class="card-header">
+                 <h5 class="card-title">Edit Server Details</h5>
+            </div>
+
+
+            <div hidden class="card-body">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <InputNumber id="Id" class="form-control" @bind-Value="Server.Id"/>
+                </div>
+            </div>
+
+
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <InputText id="name" class="form-control" @bind-Value="Server.Name"/>
+                    <div class="col">
+                        <ValidationMessage For="() => Server.Name"></ValidationMessage>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="city" class="form-label">City</label>
+                    <InputText id="city" class="form-control" @bind-Value="Server.City"/>
+                    <div class="col">
+                        <ValidationMessage For="() => Server.Name"></ValidationMessage>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="status" class="form-label">Status</label>
+                    <InputCheckbox id="status" class="form-Checkbox" @bind-Value="Server.IsOnline">
+                    </InputCheckbox>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <Button Color="ButtonColor.Success" Type="ButtonType.Submit">Save</Button>
+                    <Button Color="ButtonColor.Info" @onclick="GoBack"> Back</Button>
+                </div>
+            </div>
+        </div>
+
+        <ValidationSummary/>
+    </EditForm>
+}
+else
+{
+    <p>Loading...</p>
+}
+
+@code {
+    [Parameter] public int? Id { get; set; }
+
+    [SupplyParameterFromForm(FormName = "ServerEdit")]
+    private Server? Server { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (Id.HasValue)
+            Server ??= ServersRepository.GetServerById(Id.Value);
+    }
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo("/Servers");
+    }
+
+    private void HandleSubmit(EditContext obj)
+    {
+        if (Server == null)
+            return;
+
+        ServersRepository.UpdateServer(Server.Id, Server);
+        Navigation.NavigateTo("/Servers");
+    }
+
+}
