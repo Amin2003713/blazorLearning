@@ -11,7 +11,7 @@ public class Todo
 
     public DateTime  CreatedAt {  get; set; } = DateTime.Now;
 
-    public DateTime FinishedAt { get; set; }
+    public DateTime? FinishedAt { get; set; }
 
     public bool IsEditing { get; set; }
 
@@ -112,7 +112,9 @@ public static class TodoRepository
         if (todoToUpdate == null) return;
 
         todoToUpdate.Name = todo.Name;
-        todoToUpdate.FinishedAt = todo.FinishedAt;
+        if(todo.IsFinished)
+            todoToUpdate.FinishedAt = DateTime.Now;
+
         todoToUpdate.IsFinished = todo.IsFinished;
     }
 

@@ -38,12 +38,32 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTZXJ2ZXJzXEFkZFNlcnZlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/Lerning/blazorLearning/BlazorApp1/Components/Pages/Servers/Components/DisplyCity.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTZXJ2ZXJzXENvbXBvbmVudHNcRGlzcGx5Q2l0eS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Lerning/blazorLearning/BlazorApp1/Components/Pages/Servers/Components/DisplyListCity.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTZXJ2ZXJzXENvbXBvbmVudHNcRGlzcGx5TGlzdENpdHkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Lerning/blazorLearning/BlazorApp1/Components/Pages/Servers/Components/DisplyServerComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTZXJ2ZXJzXENvbXBvbmVudHNcRGlzcGx5U2VydmVyQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Lerning/blazorLearning/BlazorApp1/Components/Pages/Servers/Components/ServerListComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTZXJ2ZXJzXENvbXBvbmVudHNcU2VydmVyTGlzdENvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/Lerning/blazorLearning/BlazorApp1/Components/Pages/Servers/EditServer.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTZXJ2ZXJzXEVkaXRTZXJ2ZXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/Lerning/blazorLearning/BlazorApp1/Components/Pages/Servers/ListServers.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTZXJ2ZXJzXExpc3RTZXJ2ZXJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Lerning/blazorLearning/BlazorApp1/Components/Pages/ToDo/ListTodos.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUb0RvXExpc3RUb2Rvcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/Lerning/blazorLearning/BlazorApp1/Components/Pages/Weather.razor]

@@ -1,0 +1,42 @@
+   @rendermode InteractiveServer
+<div class="p-1" @key="context.Id">
+    @context.Name in @context.City is
+    <span
+        style="color:@(context.IsOnline ? "green" : "red")">
+                    @(context.IsOnline ? "Online" : "Offline")
+                </span>
+    <a href="/servers/@context.Id">
+        <Button Color="ButtonColor.Warning">Edit</Button>
+    </a>
+    <Button Type="ButtonType.Button" Color="ButtonColor.Light"
+            @onclick="() => { context.IsOnline = !context.IsOnline; ServersRepository.UpdateServer(context.Id, context); }">
+        Toggle
+    </Button>
+    <Button Type="ButtonType.Button" Color="ButtonColor.Danger" @onclick="() => { Delete(context.Id); }">
+        Delete
+    </Button>
+</div>
+
+@code {  
+
+    [Parameter]
+    public Server context { get; set; }
+
+
+    [Parameter] public EventCallback<int> OnServerDeleted { get; set; }
+
+
+   private void GoToEdit(int serverId)
+    {
+        Navigation.NavigateTo($"/servers/{serverId}");
+    }
+
+    private void Delete(int serverId)
+    {
+        Console.WriteLine(serverId);
+        if (serverId != 0)
+            ServersRepository.DeleteServer(serverId);
+        OnServerDeleted.InvokeAsync(serverId); // Notify the parent component 
+
+    }
+}

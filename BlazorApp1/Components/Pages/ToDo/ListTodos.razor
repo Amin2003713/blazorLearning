@@ -1,0 +1,121 @@
+@page "/ListTodos"
+@using System.Globalization
+@using DNTPersianUtils.Core
+@using ToDoPrj
+
+<h3>ListTodos</h3>
+
+<button class="btn btn-primary" @onclick="() => { Todo.NewTodo(); }">Add New Todo</button>
+
+@if (Elements!.Any())
+{
+    <div class="container mt-4">
+        <div class="row mb-3">
+            <div class="col">
+                <h6>لیست کارها</h6>
+            </div>
+            <div class="col-auto">
+                <input type="text" class="form-control" @bind="searchString1" placeholder="بگرد و پیدا کن"/>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>اسم</th>
+                <th>تاریخ درج</th>
+                <th>پایان بافته</th>
+                <th>تاریخ پایان</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var context in Elements.Where(e => FilterFunc1(e)))
+            {
+                <tr @onclick="() => EditItem(context)" @onblur="() => SaveItem(context)" tabindex="0">
+                    <td>
+                        @if (context.IsEditing)
+                        {
+                            <input type="text" class="form-control" @bind="context.Name"
+                                   @onkeypress="e => HandleKeyPress(e, context)"/>
+                        }
+                        else
+                        {
+                            @context.Name
+                        }
+                    </td>
+                    <td>@context.CreatedAt.ToLongPersianDateString()</td>
+                    <td>
+                        @if (context.IsEditing)
+                        {
+                            <select class="form-select" @bind="context.IsFinished" @onkeypress="e => HandleKeyPress(e, context)">
+                                <option value="true">True</option>
+                                <option value="false">False</option>
+                            </select>
+                        }
+                        else
+                        {
+                            @context.IsFinished
+                        }
+                    </td>
+                    <td>@context.FinishedAt.FormatDateToShortPersianDateTime()</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        
+    </div>
+}
+
+@code {
+
+    private List<Todo>? Elements { get; } = TodoRepository.GetTodos().OrderBy(a => a.CreatedAt).ToList();
+
+
+    private string searchString1 = "";
+    private HashSet<Todo> selectedItems = new();
+
+    void EditItem(Todo item)
+    {
+        // var editingTodos = Elements!.Where(a => a.IsEditing);
+        // foreach (var todo in editingTodos)
+        // {
+        //     todo.IsEditing = false;
+        // }
+
+        item.IsEditing = true;
+    }
+
+    private bool FilterFunc1(Todo element)
+    {
+        return FilterFunc(element, searchString1);
+    }
+
+    private bool FilterFunc(Todo element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+
+        if (element.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        if ($"{element.Id} {element.CreatedAt} {element.IsFinished} {element.FinishedAt}".Contains(searchString))
+            return true;
+
+        return false;
+    }
+
+    void SaveItem(Todo item)
+    {
+        item.IsEditing = false;
+        TodoRepository.UpdateTodo(item.Id, item);
+    }
+
+    void HandleKeyPress(KeyboardEventArgs e, Todo item)
+    {
+        if (e.Key == "Enter")
+        {
+            SaveItem(item);
+        }
+    }
+
+}

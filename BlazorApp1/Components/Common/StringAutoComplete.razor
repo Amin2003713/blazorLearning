@@ -1,40 +1,37 @@
 <div class="row">
     <div class="col-md-5 col-sm-12">
-        <AutoComplete @bind-Value="SelectedItem"
+        <AutoComplete @bind-Value="customerName"
                       TItem="string"
-                      DataProvider="StringDataProvider"
-                      Placeholder="@Placeholder"
-                      OnChanged="OnAutoCompleteChanged"
-                      Size="AutoCompleteSize.Large"/>
+                      DataProvider="CityDataProvider"
+                      PropertyName="CustomerName"
+                      Placeholder="Search a customer..."
+                      OnChanged="(string customer) => OnAutoCompleteChanged(customer)"/>
     </div>
 </div>
 
 @code {
-    [Parameter] public string Placeholder { get; set; } = "Search and select...";
 
-    [Parameter] public List<string> Items { get; set; } = new();
+     private string? customerName { get; set; }
 
-    [Parameter] public EventCallback<string> OnItemSelected { get; set; }
+    [Parameter] public IEnumerable<string>? Cities { get; set; }
 
-    private string SelectedItem { get; set; } = string.Empty;
+    [Parameter] public EventCallback<string> SelectName { get; set; }
 
-    private async Task<AutoCompleteDataProviderResult<string>> StringDataProvider(AutoCompleteDataProviderRequest<string> request)
+
+
+    private async Task<AutoCompleteDataProviderResult<string>> CityDataProvider(AutoCompleteDataProviderRequest<string> request)
     {
-        var filteredItems = Items.Where(item => item.Contains(request.Filter.Value, StringComparison.OrdinalIgnoreCase))
-            .OrderBy(item => item)
-            .ToList();
 
-        return await Task.FromResult(new AutoCompleteDataProviderResult<string>
-        {
-            Data = filteredItems,
-            TotalCount = filteredItems.Count
-        });
+        return await Task.FromResult(request.ApplyTo(Cities!));
     }
 
-    private void OnAutoCompleteChanged(string selectedItem)
+   
+
+    private async Task OnAutoCompleteChanged(string customer)
     {
-        SelectedItem = selectedItem;
-        OnItemSelected.InvokeAsync(selectedItem);
+
+        Console.WriteLine($"'{customer}' selected.");
+        await SelectName.InvokeAsync(customer);
     }
 
 }

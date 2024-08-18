@@ -5,7 +5,7 @@
 <MudDatePicker Culture="SelectedCulture" @bind-Date="@Date" @key=datePickerState />
 @code {
     bool datePickerState = false;
-    public DateTime? Date { get; set; }
+    public DateTime? Date { get; set; }  = DateTime.Now;
     private bool IsPersian { get; set; }
 
     private void CultureChanged()

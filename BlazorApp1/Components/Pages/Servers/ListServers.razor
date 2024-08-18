@@ -1,59 +1,18 @@
 @page "/Servers"
 @using BlazorApp1.Components.Common
+@using BlazorApp1.Components.Pages.Servers.Components
 @rendermode  InteractiveServer
 <h3>ListServers</h3>
 
-<StringAutoComplete Items="Cities" Placeholder="Search a customer..." OnItemSelected="HandleSelectedCity"/>
+<StringAutoComplete 
+    Cities="Cities"
+    SelectName="SearchCallBack"/> 
 
-<div class="container" style="display: flex; flex-wrap: wrap; gap: 10px;">
-    @foreach (var city in Cities.Distinct())
-    {
-        <Card Class="mb-4" Style="width:8rem; height:10rem;"
-              Color="@(city == SelectedCity ? CardColor.Primary : CardColor.None)">
-            <img class="rounded-top" Style="width:7rem; height:5rem;" src="images/@GetFile(city.ToLower())"
-                 alt="placeholder"/>
-            <CardBody>
-                <Button Color="ButtonColor.Primary" To="#" Type="ButtonType.Button"
-                        @onclick="@(() => FilterData(city))">
-                    @city
-                </Button>
-            </CardBody>
-        </Card>
-    }
-    <Card Class="mb-4" Style="width:8rem; height:10rem;">
-        <CardBody>
-            <Icon Name="IconName.SearchHeartFill"/>
-            <Button Color="ButtonColor.Primary" To="#" Type="ButtonType.Button" @onclick="ClearFilter">
-                Clear Filter
-            </Button>
-        </CardBody>
-    </Card>
-</div>
+<DisplyListCity 
+    SelectCityCallback="HandelCityCallback"
+    CitiesCallback="HanleListCities"/>
 
-<div>
-    <ul>
-        <Virtualize   Items="Servers" >
-
-            <li class="p-1" @key="context.Id">
-                @context.Name in @context.City is
-                <span
-                    style="color:@(context.IsOnline ? "green" : "red")">
-                    @(context.IsOnline ? "Online" : "Offline")
-                </span>
-                <a href="/servers/@context.Id">
-                    <Button Color="ButtonColor.Warning">Edit</Button>
-                </a>
-                <Button Type="ButtonType.Button" Color="ButtonColor.Light"
-                        @onclick="() => { context.IsOnline = !context.IsOnline; ServersRepository.UpdateServer(context.Id, context); }">
-                    Toggle
-                </Button>
-                <Button Type="ButtonType.Button" Color="ButtonColor.Danger" @onclick="() => { Delete(context.Id); }">
-                    Delete
-                </Button>
-            </li>
-        </Virtualize>
-    </ul>
-</div>
+<ServerListComponent CityName="@CitySelected"/>
 
 <a href="/AddServer">
     <Button Color="ButtonColor.Primary">Add new</Button>
@@ -61,55 +20,24 @@
 
 @code {
 
-    private List<Server> Servers { get; set; } = ServersRepository.GetServres();
-    private List<string> Cities { get; set; } = new();
-    private string SelectedCity { get; set; }
+    private string? CitySelected { get;  set; }
+    private string? SearchString { get;  set; }
+    private List<string> Cities { get; set; }
 
-    protected override void OnInitialized()
+    private void HandelCityCallback(string cityName)
     {
-        Cities = Servers.Select(a => a.City).Distinct().ToList();
-        base.OnInitialized();
+        CitySelected = cityName;
     }
 
-    private string GetFile(string city)
+
+    private void HanleListCities(List<string> obj)
     {
-        return city + ".png";
+        Cities = obj;
     }
 
-    private void GoToEdit(int serverId)
+    private void SearchCallBack(string obj)
     {
-        Navigation.NavigateTo($"/servers/{serverId}");
-    }
-
-    private void Delete(int serverId)
-    {
-        if (serverId != 0)
-            ServersRepository.DeleteServer(serverId);
-
-        Cities = ServersRepository.GetServres().Select(a => a.City).Distinct().ToList()!;
-    }
-
-    private void GoToAdd()
-    {
-        Navigation.NavigateTo("/AddServer");
-    }
-
-    private void FilterData(string city)
-    {
-        Servers = ServersRepository.GetServres().Where(a => string.Equals(a.City, city, StringComparison.OrdinalIgnoreCase)).ToList();
-        SelectedCity = city;
-    }
-    
-
-    private void ClearFilter()
-    {
-        Servers = ServersRepository.GetServres();
-        SelectedCity = null!;
-    }
-
-    private void HandleSelectedCity(string obj)
-    {
-        FilterData(obj);
+        SearchString = obj;
     }
 
 }

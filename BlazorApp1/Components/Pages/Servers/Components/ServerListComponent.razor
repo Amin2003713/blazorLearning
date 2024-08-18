@@ -1,0 +1,39 @@
+@using DNTPersianUtils.Core
+@rendermode InteractiveServer
+
+<div>
+    <ul>
+        <Virtualize Items="Servers">
+            <li>
+                <DisplyServerComponent
+                    context="context"
+                    OnServerDeleted="HandleServerDeleted"/>
+            </li>
+        </Virtualize>
+    </ul>
+</div>
+
+@code {
+     [Parameter]
+    public string? CityName { get; set; }
+
+    [Parameter] public string SearchSorting { get; set; }
+
+     private List<Server> Servers { get; set; } = ServersRepository.GetServres();
+
+
+     protected override void OnParametersSet()
+     {
+         Servers = CityName is null or "" ? ServersRepository.GetServres() : ServersRepository.GetServersByCity(CityName);
+
+         if (SearchSorting is not null or "")
+             Servers = ServersRepository.SearchServers(SearchSorting);
+     }
+
+
+     private void HandleServerDeleted(int serverId)
+     {
+         Servers.RemoveAll(s => s.Id == serverId);
+         StateHasChanged(); // Notify the parent component to re-render
+     }
+}

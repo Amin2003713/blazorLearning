@@ -1,0 +1,33 @@
+<Card Class="mb-4" Style="width:8rem; height:10rem;"
+      Color="@(city == SelectedCity ? CardColor.Primary : CardColor.None)">
+    <img class="rounded-top" Style="width:7rem; height:5rem;" src="images/@GetFile(city.ToLower())"
+         alt="placeholder"/>
+    <CardBody>
+        <Button Color="ButtonColor.Primary" To="#" Type="ButtonType.Button"
+                @onclick="@(() => FilterData(city))">
+            @city
+        </Button>
+    </CardBody>
+</Card>
+
+@code {
+
+    [Parameter] public string city { get; set; }
+    [Parameter] public string SelectedCity { get; set; }
+
+    [Parameter] public EventCallback<string> Callback { get; set; }
+
+    private async Task FilterData(string city)
+    {
+        SelectedCity = city;
+
+        await Callback.InvokeAsync(city);
+    }
+
+
+    private string GetFile(string city)
+    {
+        return city + ".png";
+    }
+
+}

@@ -39,6 +39,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -48,6 +53,10 @@
             "Blazor.Bootstrap": {
               "target": "Package",
               "version": "[3.0.0-preview.3, )"
+            },
+            "DNTPersianUtils.Core": {
+              "target": "Package",
+              "version": "[6.3.0, )"
             },
             "PersianDate": {
               "target": "Package",

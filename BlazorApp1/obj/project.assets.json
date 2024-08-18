@@ -20,6 +20,19 @@
           "buildMultiTargeting/Blazor.Bootstrap.props": {}
         }
       },
+      "DNTPersianUtils.Core/6.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/DNTPersianUtils.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/DNTPersianUtils.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Authorization/8.0.4": {
         "type": "package",
         "dependencies": {
@@ -267,6 +280,34 @@
         "staticwebassets/icon/128X128.png",
         "staticwebassets/pdfjs-4.0.379.min.js",
         "staticwebassets/pdfjs-4.0.379.worker.min.js"
+      ]
+    },
+    "DNTPersianUtils.Core/6.3.0": {
+      "sha512": "ONQSndnL4s4/R4BfhVnDUmHhrtnKO1zBI5AxOIpK9+C9OrQrplkGJdxIXzWoQjda2wbDHVitqeEo1LPGgkagRw==",
+      "type": "package",
+      "path": "dntpersianutils.core/6.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "dntpersianutils.core.6.3.0.nupkg.sha512",
+        "dntpersianutils.core.nuspec",
+        "lib/net46/DNTPersianUtils.Core.dll",
+        "lib/net46/DNTPersianUtils.Core.xml",
+        "lib/net5.0/DNTPersianUtils.Core.dll",
+        "lib/net5.0/DNTPersianUtils.Core.xml",
+        "lib/net6.0/DNTPersianUtils.Core.dll",
+        "lib/net6.0/DNTPersianUtils.Core.xml",
+        "lib/net7.0/DNTPersianUtils.Core.dll",
+        "lib/net7.0/DNTPersianUtils.Core.xml",
+        "lib/net8.0/DNTPersianUtils.Core.dll",
+        "lib/net8.0/DNTPersianUtils.Core.xml",
+        "lib/netstandard1.3/DNTPersianUtils.Core.dll",
+        "lib/netstandard1.3/DNTPersianUtils.Core.xml",
+        "lib/netstandard2.0/DNTPersianUtils.Core.dll",
+        "lib/netstandard2.0/DNTPersianUtils.Core.xml",
+        "lib/netstandard2.1/DNTPersianUtils.Core.dll",
+        "lib/netstandard2.1/DNTPersianUtils.Core.xml"
       ]
     },
     "Microsoft.AspNetCore.Authorization/8.0.4": {
@@ -644,6 +685,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "Blazor.Bootstrap >= 3.0.0-preview.3",
+      "DNTPersianUtils.Core >= 6.3.0",
       "PersianDate >= 3.5.5"
     ]
   },
@@ -686,6 +728,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -695,6 +742,10 @@
           "Blazor.Bootstrap": {
             "target": "Package",
             "version": "[3.0.0-preview.3, )"
+          },
+          "DNTPersianUtils.Core": {
+            "target": "Package",
+            "version": "[6.3.0, )"
           },
           "PersianDate": {
             "target": "Package",

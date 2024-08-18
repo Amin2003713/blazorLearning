@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "ractbDbg0VTNt/cxTOOQvIgzsy5my4U5zWmw49FTwYtG7804owhDZFUKLoaMib3sEcQKUtLMSHcMGKQNXwKvmA==",
+  "dgSpecHash": "kphskFyZjC7qLAJCe9uLDkkvLbeE1gtKfzv7Y9m2EPxitnGtj1yYHQpSBmefrqfJqoiAe7/xLlmZoj6JpCfCfQ==",
   "success": true,
   "projectFilePath": "E:\\Lerning\\blazorLearning\\BlazorApp1\\BlazorApp1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\amin1\\.nuget\\packages\\blazor.bootstrap\\3.0.0-preview.3\\blazor.bootstrap.3.0.0-preview.3.nupkg.sha512",
+    "C:\\Users\\amin1\\.nuget\\packages\\dntpersianutils.core\\6.3.0\\dntpersianutils.core.6.3.0.nupkg.sha512",
     "C:\\Users\\amin1\\.nuget\\packages\\microsoft.aspnetcore.authorization\\8.0.4\\microsoft.aspnetcore.authorization.8.0.4.nupkg.sha512",
     "C:\\Users\\amin1\\.nuget\\packages\\microsoft.aspnetcore.components\\8.0.4\\microsoft.aspnetcore.components.8.0.4.nupkg.sha512",
     "C:\\Users\\amin1\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\8.0.4\\microsoft.aspnetcore.components.analyzers.8.0.4.nupkg.sha512",

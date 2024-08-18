@@ -8,12 +8,14 @@
 
     <ItemGroup>
       <PackageReference Include="Blazor.Bootstrap" Version="3.0.0-preview.3" />
+      <PackageReference Include="DNTPersianUtils.Core" Version="6.3.0" />
       <PackageReference Include="PersianDate" Version="3.5.5" />
     </ItemGroup>
 
     <ItemGroup>
       <_ContentIncludedByDefault Remove="wwwroot\bootstrap\bootstrap.min.css" />
       <_ContentIncludedByDefault Remove="wwwroot\bootstrap\bootstrap.min.css.map" />
+      <_ContentIncludedByDefault Remove="Components\ToDo\ListTodos.razor" />
     </ItemGroup>
 
     <ItemGroup>
