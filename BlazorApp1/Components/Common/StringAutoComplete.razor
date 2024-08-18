@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-md-5 col-sm-12">
+        <AutoComplete @bind-Value="SelectedItem"
+                      TItem="string"
+                      DataProvider="StringDataProvider"
+                      Placeholder="@Placeholder"
+                      OnChanged="OnAutoCompleteChanged"
+                      Size="AutoCompleteSize.Large"/>
+    </div>
+</div>
+
+@code {
+    [Parameter] public string Placeholder { get; set; } = "Search and select...";
+
+    [Parameter] public List<string> Items { get; set; } = new();
+
+    [Parameter] public EventCallback<string> OnItemSelected { get; set; }
+
+    private string SelectedItem { get; set; } = string.Empty;
+
+    private async Task<AutoCompleteDataProviderResult<string>> StringDataProvider(AutoCompleteDataProviderRequest<string> request)
+    {
+        var filteredItems = Items.Where(item => item.Contains(request.Filter.Value, StringComparison.OrdinalIgnoreCase))
+            .OrderBy(item => item)
+            .ToList();
+
+        return await Task.FromResult(new AutoCompleteDataProviderResult<string>
+        {
+            Data = filteredItems,
+            TotalCount = filteredItems.Count
+        });
+    }
+
+    private void OnAutoCompleteChanged(string selectedItem)
+    {
+        SelectedItem = selectedItem;
+        OnItemSelected.InvokeAsync(selectedItem);
+    }
+
+}

@@ -73,6 +73,7 @@ E:\Lerning\blazorLearning\BlazorApp1\obj\Debug\net8.0\staticwebassets\msbuild.bu
 E:\Lerning\blazorLearning\BlazorApp1\obj\Debug\net8.0\staticwebassets.pack.json
 E:\Lerning\blazorLearning\BlazorApp1\obj\Debug\net8.0\scopedcss\Components\Layout\MainLayout.razor.rz.scp.css
 E:\Lerning\blazorLearning\BlazorApp1\obj\Debug\net8.0\scopedcss\Components\Layout\NavMenu.razor.rz.scp.css
+E:\Lerning\blazorLearning\BlazorApp1\obj\Debug\net8.0\scopedcss\Components\Layout\NotFoundPage.razor.rz.scp.css
 E:\Lerning\blazorLearning\BlazorApp1\obj\Debug\net8.0\scopedcss\bundle\BlazorApp1.styles.css
 E:\Lerning\blazorLearning\BlazorApp1\obj\Debug\net8.0\scopedcss\projectbundle\BlazorApp1.bundle.scp.css
 E:\Lerning\blazorLearning\BlazorApp1\obj\Debug\net8.0\BlazorApp1.csproj.Up2Date
@@ -81,4 +82,3 @@ E:\Lerning\blazorLearning\BlazorApp1\obj\Debug\net8.0\refint\BlazorApp1.dll
 E:\Lerning\blazorLearning\BlazorApp1\obj\Debug\net8.0\BlazorApp1.pdb
 E:\Lerning\blazorLearning\BlazorApp1\obj\Debug\net8.0\BlazorApp1.genruntimeconfig.cache
 E:\Lerning\blazorLearning\BlazorApp1\obj\Debug\net8.0\ref\BlazorApp1.dll
-E:\Lerning\blazorLearning\BlazorApp1\obj\Debug\net8.0\scopedcss\Components\Layout\NotFoundPage.razor.rz.scp.css
