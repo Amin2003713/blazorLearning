@@ -25,6 +25,10 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/Lerning/blazorLearning/ToDoPrj/Components/Common/PersianDatePicker.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cUGVyc2lhbkRhdGVQaWNrZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/Lerning/blazorLearning/ToDoPrj/Components/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -39,6 +43,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [E:/Lerning/blazorLearning/ToDoPrj/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Lerning/blazorLearning/ToDoPrj/Components/Pages/ToDo/ListTodos.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUb0RvXExpc3RUb2Rvcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/Lerning/blazorLearning/ToDoPrj/Components/Routes.razor]

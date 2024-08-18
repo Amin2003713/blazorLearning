@@ -1,0 +1,163 @@
+@page "/ListTodos"
+@using System.Globalization
+@using DNTPersianUtils.Core
+@using ToDoPrj.Components.Common
+@rendermode InteractiveServer
+
+<h3>ListTodos</h3>
+<MudPopoverProvider/>
+
+<MudButton Color="Color.Primary" @onclick="@(() => { Todo.NewTodo(); })">Add New Todo</MudButton>
+
+
+@if (Elements!.Any())
+{
+    <MudRTLProvider RightToLeft="@true">
+        <MudTable Items="@Elements" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped"
+                  Filter="new Func<Todo, bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1">
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">لیست کارها</MudText>
+                <MudSpacer/>
+                <MudTextField @bind-Value="searchString1" Placeholder="بگرد و پیدا کن" Adornment="Adornment.Start"
+                              AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0">
+                </MudTextField>
+
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>اسم</MudTh>
+                <MudTh>تاریخ درج</MudTh>
+                <MudTh>پایان بافته</MudTh>
+                <MudTh>تاریخ پایان</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="name" ondblclick="@(() => EditItem(context))" @onblur="() => SaveItem(context)">
+                    @if (context.IsEditing)
+                    {
+                        <MudTextField @bind-Value="context.Name" Immediate="true"
+                                      @onkeypress="@(e => HandleKeyPress(e, context))"/>
+                    }
+                    else
+                    {
+                        @context.Name
+                    }
+                </MudTd>
+
+                <MudTd DataLabel="CreatedAt">@context.CreatedAt.ToLongPersianDateString()</MudTd>
+
+                <MudTd DataLabel="IsFinished" ondblclick="@(() => EditItem(context))" @onblur="() => SaveItem(context)">
+                    @if (context.IsEditing)
+                    {
+                        <MudSelect T="bool" Label="IsFinished" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter"
+                                   @bind-Value="context.IsFinished" Immediate="true"
+                                   @onkeypress="@(e => HandleKeyPress(e, context))">
+                            <MudSelectItem T="bool" Value="true"/>
+                            <MudSelectItem T="bool" Value="false"/>
+                        </MudSelect>
+                    }
+                    else
+                    {
+                        @context.IsFinished
+                    }
+                </MudTd>
+
+                <MudTd DataLabel="FinishedAt" ondblclick="@(() => EditItem(context))" @onblur="() => SaveItem(context)">
+                    @if (context.IsEditing)
+                    {
+                    <PersianDatePicker PickerVariant="PickerVariant.Dialog"  date="@context.FinishedAt"
+                                   Immediate="true"
+                                   @onkeypress="@(e => HandleKeyPress(e, context))"/>
+                    }
+                    else
+                    {
+                    @context.FinishedAt.FormatDateToLongPersianDateTime()
+                    }
+                </MudTd>
+               
+            </RowTemplate>
+
+            <PagerContent >
+                <MudTablePager
+                    RowsPerPageString="ردیف در هر صفحه"/>
+            </PagerContent>
+        </MudTable>
+
+        <div class="d-flex flex-wrap mt-4">
+            <MudSwitch @bind-Value="hover" Color="Color.Primary" @onclick="() => { hover = !hover; }">هاور</MudSwitch>
+            <MudSwitch @bind-Value="dense" Color="Color.Secondary" @onclick="() => { dense = !dense; }">
+                فشرده
+            </MudSwitch>
+            <MudSwitch @bind-Value="striped" Color="Color.Tertiary" @onclick="() => { striped = !striped; }">
+                راه‌راه
+            </MudSwitch>
+            <MudSwitch @bind-Value="bordered" Color="Color.Warning" @onclick="() => { bordered = !bordered; }">
+                مرزبندی
+            </MudSwitch>
+
+            <MudSpacer/>
+            <div style="min-width:200px;">
+                <MudText Class="align-self-center d-inline">انتخاب شده: @selectedItem1?.Name</MudText>
+            </div>
+        </div>
+    </MudRTLProvider>
+}
+
+
+@code {
+
+    private List<Todo>? Elements { get; } = TodoRepository.GetTodos();
+
+
+    private bool dense;
+    private bool hover = true;
+    private bool striped;
+    private bool bordered;
+    private string searchString1 = "";
+    private Todo selectedItem1;
+    private HashSet<Todo> selectedItems = new();
+
+    void EditItem(Todo item)
+    {
+        var editingTodos = Elements!.Where(a => a.IsEditing);
+        foreach (var todo in editingTodos)
+        {
+            todo.IsEditing = false;
+        }
+
+
+        item.IsEditing = true;
+    }
+
+    private bool FilterFunc1(Todo element)
+    {
+        return FilterFunc(element, searchString1);
+    }
+
+    private bool FilterFunc(Todo element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+
+        if (element.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        if ($"{element.Id} {element.CreatedAt} {element.IsFinished} {element.FinishedAt}".Contains(searchString))
+            return true;
+
+        return false;
+    }
+
+
+    void SaveItem(Todo item)
+    {
+        item.IsEditing = false;
+    }
+
+    void HandleKeyPress(KeyboardEventArgs e, Todo item)
+    {
+        if (e.Key == "Enter")
+        {
+            SaveItem(item);
+        }
+    }
+
+}

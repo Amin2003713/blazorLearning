@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "DNTPersianUtils.Core/6.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/DNTPersianUtils.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/DNTPersianUtils.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Authorization/8.0.6": {
         "type": "package",
         "dependencies": {
@@ -272,6 +285,34 @@
     }
   },
   "libraries": {
+    "DNTPersianUtils.Core/6.3.0": {
+      "sha512": "ONQSndnL4s4/R4BfhVnDUmHhrtnKO1zBI5AxOIpK9+C9OrQrplkGJdxIXzWoQjda2wbDHVitqeEo1LPGgkagRw==",
+      "type": "package",
+      "path": "dntpersianutils.core/6.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "dntpersianutils.core.6.3.0.nupkg.sha512",
+        "dntpersianutils.core.nuspec",
+        "lib/net46/DNTPersianUtils.Core.dll",
+        "lib/net46/DNTPersianUtils.Core.xml",
+        "lib/net5.0/DNTPersianUtils.Core.dll",
+        "lib/net5.0/DNTPersianUtils.Core.xml",
+        "lib/net6.0/DNTPersianUtils.Core.dll",
+        "lib/net6.0/DNTPersianUtils.Core.xml",
+        "lib/net7.0/DNTPersianUtils.Core.dll",
+        "lib/net7.0/DNTPersianUtils.Core.xml",
+        "lib/net8.0/DNTPersianUtils.Core.dll",
+        "lib/net8.0/DNTPersianUtils.Core.xml",
+        "lib/netstandard1.3/DNTPersianUtils.Core.dll",
+        "lib/netstandard1.3/DNTPersianUtils.Core.xml",
+        "lib/netstandard2.0/DNTPersianUtils.Core.dll",
+        "lib/netstandard2.0/DNTPersianUtils.Core.xml",
+        "lib/netstandard2.1/DNTPersianUtils.Core.dll",
+        "lib/netstandard2.1/DNTPersianUtils.Core.xml"
+      ]
+    },
     "Microsoft.AspNetCore.Authorization/8.0.6": {
       "sha512": "H1CSbD7UeSPsrJSUpvbms6SqWMa5y8ch4Rw+gyHh2uztOEb20fTP2r0AUnStn1Q9WYghikiDO5wzkgV+n6KC2Q==",
       "type": "package",
@@ -696,6 +737,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "DNTPersianUtils.Core >= 6.3.0",
       "MudBlazor >= 7.*"
     ]
   },
@@ -744,6 +786,10 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "DNTPersianUtils.Core": {
+            "target": "Package",
+            "version": "[6.3.0, )"
+          },
           "MudBlazor": {
             "target": "Package",
             "version": "[7.*, )"

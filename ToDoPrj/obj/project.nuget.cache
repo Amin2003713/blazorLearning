@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ZwWS9SEy3ch9wJGBl78LZyDSPFxXadvmZgd1qyIgcDPEAN9P08lnLnsNv7GeZgxEbjQAwfpwNsv93rcEZtZwIw==",
+  "dgSpecHash": "fGrqPWxZ3N4JKQCtrgBqAKcW+sxDSRmYgWFf6xszeItNey8Y8K5ncBmzqUUoPYGwuvIWC7mteOKne/LY1MxOgQ==",
   "success": true,
   "projectFilePath": "E:\\Lerning\\blazorLearning\\ToDoPrj\\ToDoPrj.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\amin1\\.nuget\\packages\\dntpersianutils.core\\6.3.0\\dntpersianutils.core.6.3.0.nupkg.sha512",
     "C:\\Users\\amin1\\.nuget\\packages\\microsoft.aspnetcore.authorization\\8.0.6\\microsoft.aspnetcore.authorization.8.0.6.nupkg.sha512",
     "C:\\Users\\amin1\\.nuget\\packages\\microsoft.aspnetcore.components\\8.0.6\\microsoft.aspnetcore.components.8.0.6.nupkg.sha512",
     "C:\\Users\\amin1\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\8.0.6\\microsoft.aspnetcore.components.analyzers.8.0.6.nupkg.sha512",

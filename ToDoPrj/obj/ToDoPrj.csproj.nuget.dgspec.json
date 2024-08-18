@@ -45,6 +45,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "DNTPersianUtils.Core": {
+              "target": "Package",
+              "version": "[6.3.0, )"
+            },
             "MudBlazor": {
               "target": "Package",
               "version": "[7.*, )"

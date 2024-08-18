@@ -48,6 +48,10 @@
             "Blazor.Bootstrap": {
               "target": "Package",
               "version": "[3.0.0-preview.3, )"
+            },
+            "PersianDate": {
+              "target": "Package",
+              "version": "[3.5.5, )"
             }
           },
           "imports": [
