@@ -24,4 +24,6 @@ app.UseAntiforgery();
 
 app.MapRazorComponents<App>();
 
+app.UseStatusCodePagesWithRedirects("/404");
+
 app.Run();

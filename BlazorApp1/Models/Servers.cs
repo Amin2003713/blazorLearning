@@ -1,10 +1,15 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace BlazorApp1.Models;
 
 public class Server
 {
     public int Id { get; set; }
-    public required string? Name { get; set; }
-    public required string? City { get; set; }
+    [Required]
+    public  string? Name { get; set; }
+
+    [Required]
+    public string? City { get; set; }
     public bool IsOnline { get; set; }
 }
 
