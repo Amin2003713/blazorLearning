@@ -3,8 +3,8 @@
 @using BlazorApp1.Components.Pages.Servers.Components
 @rendermode  InteractiveServer
 <h3>ListServers</h3>
-
-
+  
+         
 <DisplyListCity
     @ref="DisplyListCity"
     SelectCityCallback="HandelCityCallback"/>
@@ -12,7 +12,15 @@
 <StringAutoComplete @ref="StringAutoComplete"
                     SelectName="SearchCallBack"/>
 
-<ServerListComponent CityName="@CitySelected" SearchSorting="@SearchString"/>
+
+<CascadingValue
+    Name="@nameof(CitySelected)"
+    Value="@CitySelected">
+
+    <ServerListComponent CityName="@CitySelected" SearchSorting="@SearchString"/> 
+
+</CascadingValue>
+
 
 <a href="/AddServer">
     <Button Color="ButtonColor.Primary">Add new</Button>
@@ -34,7 +42,7 @@
 
 
     private void SearchCallBack(string obj)
-    {
+    {            
         DisplyListCity!.ClearSelection();
 
 

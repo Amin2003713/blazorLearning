@@ -43,3 +43,4 @@ E:\Lerning\blazorLearning\BlazorApp1\obj\Debug\net8.0\refint\BlazorApp1.dll
 E:\Lerning\blazorLearning\BlazorApp1\obj\Debug\net8.0\BlazorApp1.pdb
 E:\Lerning\blazorLearning\BlazorApp1\obj\Debug\net8.0\BlazorApp1.genruntimeconfig.cache
 E:\Lerning\blazorLearning\BlazorApp1\obj\Debug\net8.0\ref\BlazorApp1.dll
+E:\Lerning\blazorLearning\BlazorApp1\bin\Debug\net8.0\Microsoft.AspNetCore.Components.QuickGrid.dll

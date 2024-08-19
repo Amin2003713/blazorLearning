@@ -1,55 +1,67 @@
 @page "/AddServer"
+@using BlazorApp1.Components.Pages.Generic
 
 <h3>Add Server</h3>
 
-    <EditForm Model="Server" OnValidSubmit="HandleSubmit" FormName="ServerAdd">
-        <DataAnnotationsValidator/>
-        <ValidationSummary/>
-        <div class="card mb-3">
-            <div class="card-header">
-                 <h5 class="card-title">Add Server Details</h5>
-            </div>
-
-            <div class="card-body">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <InputText id="name" class="form-control" @bind-Value="Server.Name"/>
-                    <div class="col">
-                        <ValidationMessage For="() => Server.Name"></ValidationMessage>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="city" class="form-label">City</label>
-                    <InputText id="city" class="form-control" @bind-Value="Server.City"/>
-                    <div class="col">
-                        <ValidationMessage For="() => Server.Name"></ValidationMessage>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="status" class="form-label">Status</label>
-                    <InputCheckbox id="status" class="form-Checkbox" @bind-Value="Server.IsOnline">
-                    </InputCheckbox>
-                </div>
-            </div>
-
-            <div class="card-footer">
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <Button Color="ButtonColor.Success" Type="ButtonType.Submit">Save</Button>
-                    <Button Color="ButtonColor.Info" @onclick="GoBack"> Back</Button>
-                </div>
-            </div>
+<EditForm Model="Server" OnValidSubmit="HandleSubmit" FormName="ServerAdd">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <div class="card mb-3">
+        <div class="card-header">
+            <h5 class="card-title">Add Server Details</h5>
         </div>
 
-        <ValidationSummary/>
-    </EditForm>
+        <AddFormFiled 
+            Lable="Name">
+            <Control>
+                <InputText id="Name" class="form-control" @bind-Value="Server!.Name"/>
+            </Control>
+            <ValidationControl>
+                <ValidationMessage For="() => Server!.Name"></ValidationMessage>
+            </ValidationControl>
+        </AddFormFiled>
+
+
+        <AddFormFiled
+            Lable="City">
+            <Control>
+                <InputText id="City" class="form-control" @bind-Value="Server!.City"/>
+            </Control>
+            <ValidationControl>
+                <ValidationMessage For="() => Server!.City"></ValidationMessage>
+            </ValidationControl>
+        </AddFormFiled>
+
+
+        <AddFormFiled
+            Lable="Status">
+            <Control>
+                <InputCheckbox id="status" class="form-Checkbox" @bind-Value="Server!.IsOnline"/>
+            </Control>
+        </AddFormFiled>
+
+
+        <div class="card-footer">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <Button Color="ButtonColor.Success" Type="ButtonType.Submit">Save</Button>
+                <Button Color="ButtonColor.Info" @onclick="GoBack"> Back</Button>
+            </div>
+        </div>
+    </div>
+
+
+    <ValidationSummary/>
+</EditForm>
 
 @code {
 
     [SupplyParameterFromForm(FormName = "ServerAdd")]
-    private Server? Server { get; set; } = new Server();
+    private Server? Server { get; set; } 
 
+    protected override void OnInitialized()
+    {
+        Server = new();
+    }
 
     private void GoBack()
     {

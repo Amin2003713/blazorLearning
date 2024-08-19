@@ -1,0 +1,66 @@
+@page "/QuickGridDemo"
+@using Microsoft.AspNetCore.Components.QuickGrid
+<h3>QuickGridDemo</h3>
+    
+<QuickGrid Items="Servers!.AsQueryable()" Pagination="PaginationState">
+    <PropertyColumn Sortable="true" Property="arg => arg.Name"></PropertyColumn>
+    <PropertyColumn Sortable="true" Property="arg => arg.City"></PropertyColumn>
+    <TemplateColumn Title="IsOnline" Sortable="true" SortBy="GridSort<Server>.ByAscending(a=>a.IsOnline)">
+        <span style="color:@(context.IsOnline ? "green" : "red")">
+        @(context.IsOnline ? "Online" : "Offline")
+        </span>
+    </TemplateColumn>    
+
+    <TemplateColumn>
+        <ChildContent>
+            <Button onclick="@(() => { GoToEdit(context.Id); })" Color="ButtonColor.Warning">Edit</Button>
+        </ChildContent>
+    </TemplateColumn>  
+
+    <TemplateColumn>
+
+        <ChildContent>
+            <Button Type="ButtonType.Button" Color="ButtonColor.Light"
+                    @onclick="@(() => ToggleServerStatus(context))">
+                Toggle
+            </Button>
+        </ChildContent>
+
+      
+    </TemplateColumn>
+    <TemplateColumn>
+        <ChildContent>
+            <Button Type="ButtonType.Button" Color="ButtonColor.Danger"
+                    @onclick="@(() => DeleteServer(context.Id))">
+                Delete
+            </Button>
+        </ChildContent>
+    </TemplateColumn>
+</QuickGrid>
+  <Paginator State="PaginationState"></Paginator>
+
+@code {
+     [Parameter] public List<Server>? Servers { get; set; } = ServersRepository.GetServres();
+     public PaginationState PaginationState { get; set; } = new PaginationState(){ItemsPerPage = 3};
+
+
+     private void ToggleServerStatus(Server server)
+     {
+         server.IsOnline = !server.IsOnline;
+     }
+
+     private void DeleteServer(int id)
+     {
+         if (id != 0)
+         {
+             ServersRepository.DeleteServer(id);
+         }
+     }
+
+     private void GoToEdit(int id)
+     {
+         Navigation.NavigateTo($"/servers/{id}");
+     }
+
+
+}

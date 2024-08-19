@@ -30,6 +30,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/Lerning/blazorLearning/BlazorApp1/Components/Pages/Generic/AddFormFiled.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xHZW5lcmljXEFkZEZvcm1GaWxlZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Lerning/blazorLearning/BlazorApp1/Components/Pages/Generic/RepeatedComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xHZW5lcmljXFJlcGVhdGVkQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Lerning/blazorLearning/BlazorApp1/Components/Pages/Generic/TypedComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xHZW5lcmljXFR5cGVkQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/Lerning/blazorLearning/BlazorApp1/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -60,6 +72,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [E:/Lerning/blazorLearning/BlazorApp1/Components/Pages/Servers/ListServers.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTZXJ2ZXJzXExpc3RTZXJ2ZXJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Lerning/blazorLearning/BlazorApp1/Components/Pages/Servers/QuickGridDemo.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTZXJ2ZXJzXFF1aWNrR3JpZERlbW8ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/Lerning/blazorLearning/BlazorApp1/Components/Pages/ToDo/ListTodos.razor]

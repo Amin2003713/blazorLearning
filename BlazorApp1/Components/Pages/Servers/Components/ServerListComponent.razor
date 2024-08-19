@@ -1,17 +1,36 @@
 @using DNTPersianUtils.Core
+@using BlazorApp1.Components.Pages.Generic
 @rendermode InteractiveServer
 
 <div>
-    <ul>
-        <Virtualize Items="Servers">
-            <li>
+    <table class="table  table-striped table-striped-columns">
+        <RepeatedComponent
+            Items="Servers">
+            <Header>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        City
+                    </th>
+                    <th>
+                         Is Online
+                    </th> 
+                    <th/>
+                    <th/>
+                    <th/>
+                </tr>
+            </Header>
+            <Row>
                 <DisplyServerComponent
                     context="context"
                     OnServerDeleted="HandleServerDeleted"/>
-            </li>
-        </Virtualize>
-    </ul>
+            </Row>
+        </RepeatedComponent>
+    </table>
 </div>
+ 
 
 @code {
      [Parameter]

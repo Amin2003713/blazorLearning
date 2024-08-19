@@ -1,0 +1,16 @@
+<div class="mb-3">
+    <label for="@Lable" class="form-label">@Lable</label>
+       @Control
+    <div class="col">
+       @ValidationControl
+    </div>
+</div>
+
+@code {
+  
+
+    [Parameter] public string? Lable { get; set; }
+    [Parameter] public RenderFragment? Control { get; set; }
+    [Parameter] public RenderFragment? ValidationControl { get; set; }
+  
+}

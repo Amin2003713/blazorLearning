@@ -1,23 +1,38 @@
 @rendermode InteractiveServer
 
-<div class="p-1" @key="context.Id">
-    @context.Name in @context.City is
-    <span style="color:@(context.IsOnline ? "green" : "red")">
+<tr style="background-color: @GetColor()">
+    <td class="p-1" @key="context.Id" >
+        @context.Name 
+    </td> 
+    <td>
+        @context.City
+    </td>
+    <td>
+        <span style="color:@(context.IsOnline ? "green" : "red")">
         @(context.IsOnline ? "Online" : "Offline")
     </span>
-    
-    <Button onclick="@(() => { GoToEdit(context.Id); })" Color="ButtonColor.Warning">Edit</Button>
-    <Button Type="ButtonType.Button" Color="ButtonColor.Light"
-            @onclick="ToggleServerStatus">
-        Toggle
-    </Button>
-    <Button Type="ButtonType.Button" Color="ButtonColor.Danger"
-            @onclick="DeleteServer">
-        Delete
-    </Button>
-</div>
+    </td>
+    <td>
+        <Button onclick="@(() => { GoToEdit(context.Id); })" Color="ButtonColor.Warning">Edit</Button>
+    </td>                                                                                             
+    <td>
+        <Button Type="ButtonType.Button" Color="ButtonColor.Light"
+                @onclick="ToggleServerStatus">
+            Toggle
+        </Button>
+    </td>        
+    <td>
+        <Button Type="ButtonType.Button" Color="ButtonColor.Danger"
+                @onclick="DeleteServer">
+            Delete
+        </Button>
+    </td>
+</tr>
 
 @code {
+
+    [CascadingParameter(Name = "CitySelected")]
+    public string? CityName { get; set; }
     [Parameter] public Server context { get; set; } = default!;
     [Parameter] public EventCallback<int> OnServerDeleted { get; set; }
 
@@ -39,6 +54,26 @@
     private void GoToEdit(int id)
     {
        Navigation.NavigateTo($"/servers/{id}");
+    }
+
+    private string GetColor()
+    {
+        if (CityName is null)
+        {
+            return "white";
+        }
+
+        var color = CityName switch
+        {
+            "Toronto" => "powderblue",
+            "Montreal" => "lightgray",
+            "Ottawa" => "palegreen",
+            "Calgary" => "pink",
+            "Halifax" => "white",
+            _ => "white"
+        };
+       
+        return color;
     }
 
 }
