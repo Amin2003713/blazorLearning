@@ -25,7 +25,7 @@
      protected override void OnParametersSet()
      {
          Servers = CityName is null or "" ? ServersRepository.GetServres() : ServersRepository.GetServersByCity(CityName);
-
+        // Console.WriteLine(SearchSorting +"is the search poaram");
          if (SearchSorting is not null or "")
              Servers = ServersRepository.SearchServers(SearchSorting);
      }

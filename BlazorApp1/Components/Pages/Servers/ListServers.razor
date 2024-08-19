@@ -4,15 +4,19 @@
 @rendermode  InteractiveServer
 <h3>ListServers</h3>
 
-<StringAutoComplete 
-    Cities="Cities"
-    SelectName="SearchCallBack"/> 
 
-<DisplyListCity 
+  
+
+<DisplyListCity
     SelectCityCallback="HandelCityCallback"
-    CitiesCallback="HanleListCities"/>
+    CitiesCallback="HandleListCities"/>
 
-<ServerListComponent CityName="@CitySelected"/>
+<StringAutoComplete
+    Cities="Cities"
+    SelectName="SearchCallBack"
+/>
+
+    <ServerListComponent CityName="@CitySelected"/>
 
 <a href="/AddServer">
     <Button Color="ButtonColor.Primary">Add new</Button>
@@ -30,7 +34,7 @@
     }
 
 
-    private void HanleListCities(List<string> obj)
+    private void HandleListCities(List<string> obj)
     {
         Cities = obj;
     }

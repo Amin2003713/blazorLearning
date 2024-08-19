@@ -4,7 +4,7 @@
                       TItem="string"
                       DataProvider="CityDataProvider"
                       PropertyName="CustomerName"
-                      Placeholder="Search a customer..."
+                      Placeholder="Search a City..."
                       OnChanged="(string customer) => OnAutoCompleteChanged(customer)"/>
     </div>
 </div>
@@ -13,7 +13,7 @@
 
      private string? customerName { get; set; }
 
-    [Parameter] public IEnumerable<string>? Cities { get; set; }
+     [Parameter] public IEnumerable<string>? Cities { get; set; } = ServersRepository.GetServres().Select(a => a.City).Distinct().ToList()!;
 
     [Parameter] public EventCallback<string> SelectName { get; set; }
 
@@ -21,7 +21,7 @@
 
     private async Task<AutoCompleteDataProviderResult<string>> CityDataProvider(AutoCompleteDataProviderRequest<string> request)
     {
-
+        Cities =  Cities ?? ServersRepository.GetServres().Select(a => a.City).Distinct().ToList()!;
         return await Task.FromResult(request.ApplyTo(Cities!));
     }
 
