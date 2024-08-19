@@ -1,4 +1,4 @@
-<div class="mb-3">
+<div class="mb-3" @attributes="Attrs">
     <label for="@Lable" class="form-label">@Lable</label>
        @Control
     <div class="col">
@@ -12,5 +12,6 @@
     [Parameter] public string? Lable { get; set; }
     [Parameter] public RenderFragment? Control { get; set; }
     [Parameter] public RenderFragment? ValidationControl { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public Dictionary<string , object>?  Attrs { get; set; }
   
 }
