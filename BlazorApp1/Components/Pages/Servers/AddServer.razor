@@ -1,8 +1,12 @@
 @page "/AddServer"
-@using BlazorApp1.Components.Pages.Generic
+
+@inject IJSRuntime JSRuntime
+
+@rendermode InteractiveServer 
+
 
 <h3>Add Server</h3>
-
+<NavigationLock OnBeforeInternalNavigation="OnInternal" ConfirmExternalNavigation="true"></NavigationLock>
 <EditForm Model="Server" OnValidSubmit="HandleSubmit" FormName="ServerAdd">
     <DataAnnotationsValidator/>
     <ValidationSummary/>
@@ -11,8 +15,7 @@
             <h5 class="card-title">Add Server Details</h5>
         </div>
 
-        <AddFormFiled  class="p-1"
-            Lable="Name">
+        <AddFormFiled class="p-1" Lable="Name">
             <Control>
                 <InputText id="Name" class="form-control" @bind-Value="Server!.Name"/>
             </Control>
@@ -21,9 +24,7 @@
             </ValidationControl>
         </AddFormFiled>
 
-
-        <AddFormFiled
-            Lable="City">
+        <AddFormFiled Lable="City">
             <Control>
                 <InputText id="City" class="form-control" @bind-Value="Server!.City"/>
             </Control>
@@ -32,14 +33,11 @@
             </ValidationControl>
         </AddFormFiled>
 
-
-        <AddFormFiled
-            Lable="Status">
+        <AddFormFiled Lable="Status">
             <Control>
                 <InputCheckbox id="status" class="form-Checkbox" @bind-Value="Server!.IsOnline"/>
             </Control>
         </AddFormFiled>
-
 
         <div class="card-footer">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -49,22 +47,22 @@
         </div>
     </div>
 
-
     <ValidationSummary/>
 </EditForm>
 
 @code {
+    private MyAlert _warningAlert = default!;
+    private Server? Server { get; set; }
+    private bool ShowAlert { get; set; }
 
-    [SupplyParameterFromForm(FormName = "ServerAdd")]
-    private Server? Server { get; set; } 
-
-    protected override void OnInitialized()
+    protected override async void OnInitialized()
     {
-        Server = new();
+        Server = new Server();
     }
 
     private void GoBack()
     {
+
         Navigation.NavigateTo("/Servers");
     }
 
@@ -75,6 +73,14 @@
 
         ServersRepository.AddServer(Server);
         Navigation.NavigateTo("/Servers");
+    }
+
+    private async void OnInternal(LocationChangingContext obj)
+    {
+        var result = await JSRuntime.InvokeAsync<bool>("confirm", "are U sure sure ? ");
+        
+        if(!result)
+               obj.PreventNavigation();
     }
 
 }
