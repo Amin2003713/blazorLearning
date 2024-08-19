@@ -1,42 +1,44 @@
-   @rendermode InteractiveServer
+@rendermode InteractiveServer
+
 <div class="p-1" @key="context.Id">
     @context.Name in @context.City is
-    <span
-        style="color:@(context.IsOnline ? "green" : "red")">
-                    @(context.IsOnline ? "Online" : "Offline")
-                </span>
-    <a href="/servers/@context.Id">
-        <Button Color="ButtonColor.Warning">Edit</Button>
-    </a>
+    <span style="color:@(context.IsOnline ? "green" : "red")">
+        @(context.IsOnline ? "Online" : "Offline")
+    </span>
+    
+    <Button onclick="@(() => { GoToEdit(context.Id); })" Color="ButtonColor.Warning">Edit</Button>
     <Button Type="ButtonType.Button" Color="ButtonColor.Light"
-            @onclick="() => { context.IsOnline = !context.IsOnline; ServersRepository.UpdateServer(context.Id, context); }">
+            @onclick="ToggleServerStatus">
         Toggle
     </Button>
-    <Button Type="ButtonType.Button" Color="ButtonColor.Danger" @onclick="() => { Delete(context.Id); }">
+    <Button Type="ButtonType.Button" Color="ButtonColor.Danger"
+            @onclick="DeleteServer">
         Delete
     </Button>
 </div>
 
-@code {  
-
-    [Parameter]
-    public Server context { get; set; }
-
-
+@code {
+    [Parameter] public Server context { get; set; } = default!;
     [Parameter] public EventCallback<int> OnServerDeleted { get; set; }
 
-
-   private void GoToEdit(int serverId)
+    private void ToggleServerStatus()
     {
-        Navigation.NavigateTo($"/servers/{serverId}");
+        context.IsOnline = !context.IsOnline;
+        ServersRepository.UpdateServer(context.Id, context);
     }
 
-    private void Delete(int serverId)
+    private void DeleteServer()
     {
-        Console.WriteLine(serverId);
-        if (serverId != 0)
-            ServersRepository.DeleteServer(serverId);
-        OnServerDeleted.InvokeAsync(serverId); // Notify the parent component 
-
+        if (context.Id != 0)
+        {
+            ServersRepository.DeleteServer(context.Id);
+            OnServerDeleted.InvokeAsync(context.Id);
+        }
     }
+
+    private void GoToEdit(int id)
+    {
+       Navigation.NavigateTo($"/servers/{id}");
+    }
+
 }

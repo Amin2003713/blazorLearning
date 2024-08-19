@@ -85,6 +85,7 @@ public static class ServersRepository
 
     public static List<Server> SearchServers(string serverFilter)
     {
-        return servers.Where(s => s.Name.Contains(serverFilter, StringComparison.OrdinalIgnoreCase)).ToList();
+        return servers.Where(s => s.Name!.Contains(serverFilter, StringComparison.OrdinalIgnoreCase) ||
+                                  s.City!.Contains(serverFilter, StringComparison.OrdinalIgnoreCase)).ToList();
     }
 }

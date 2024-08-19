@@ -5,18 +5,14 @@
 <h3>ListServers</h3>
 
 
-  
-
 <DisplyListCity
-    SelectCityCallback="HandelCityCallback"
-    CitiesCallback="HandleListCities"/>
+    @ref="DisplyListCity"
+    SelectCityCallback="HandelCityCallback"/>
 
-<StringAutoComplete
-    Cities="Cities"
-    SelectName="SearchCallBack"
-/>
+<StringAutoComplete @ref="StringAutoComplete"
+                    SelectName="SearchCallBack"/>
 
-    <ServerListComponent CityName="@CitySelected"/>
+<ServerListComponent CityName="@CitySelected" SearchSorting="@SearchString"/>
 
 <a href="/AddServer">
     <Button Color="ButtonColor.Primary">Add new</Button>
@@ -24,23 +20,24 @@
 
 @code {
 
-    private string? CitySelected { get;  set; }
-    private string? SearchString { get;  set; }
-    private List<string> Cities { get; set; }
+    private string? CitySelected { get; set; }
+    private string? SearchString { get; set; }
+    private DisplyListCity? DisplyListCity { get; set; }
+    private StringAutoComplete? StringAutoComplete { get; set; }
 
     private void HandelCityCallback(string cityName)
     {
+        StringAutoComplete!.Clear();
+        SearchString = null;
         CitySelected = cityName;
     }
 
 
-    private void HandleListCities(List<string> obj)
-    {
-        Cities = obj;
-    }
-
     private void SearchCallBack(string obj)
     {
+        DisplyListCity!.ClearSelection();
+
+
         SearchString = obj;
     }
 

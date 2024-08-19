@@ -1,4 +1,3 @@
-@using System.Diagnostics.CodeAnalysis
 <div class="container" style="display: flex; flex-wrap: wrap; gap: 10px;">
     @foreach (var city in Cities.Distinct())
     {
@@ -23,15 +22,11 @@
     private List<string> Cities { get; set; } = ServersRepository.GetServres().Select(a => a.City).Distinct().ToList()!;
     private string SelectedCity { get; set; }
     [Parameter] public EventCallback<string> SelectCityCallback { get; set; }
-     [Parameter] public EventCallback<List<string>> CitiesCallback { get; set; }
 
 
-     protected override async Task OnAfterRenderAsync(bool firstRender)
-     {
-         await CitiesCallback.InvokeAsync(Cities);
-     }
 
-     private void GoToAdd()
+
+private void GoToAdd()
     {
         Navigation.NavigateTo("/AddServer");
     }
@@ -39,7 +34,7 @@
     private async void FilterData(string city)
     {
         SelectedCity = city;
-        await SelectCityCallback.InvokeAsync(SelectedCity);
+        await SelectCityCallback.InvokeAsync(city);
     }
 
 
@@ -54,4 +49,8 @@
         FilterData(obj);
     }
 
+    public void ClearSelection()
+    {
+        SelectedCity = null!;
+    }
 }

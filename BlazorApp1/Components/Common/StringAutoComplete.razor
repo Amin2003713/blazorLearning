@@ -1,37 +1,46 @@
 <div class="row">
     <div class="col-md-5 col-sm-12">
-        <AutoComplete @bind-Value="customerName"
-                      TItem="string"
-                      DataProvider="CityDataProvider"
-                      PropertyName="CustomerName"
-                      Placeholder="Search a City..."
-                      OnChanged="(string customer) => OnAutoCompleteChanged(customer)"/>
+        <input type="text"
+               class="form-control"
+               placeholder="Search a City..."
+               @bind="searchTerm"
+               @oninput="OnSearchInput"/>
     </div>
 </div>
 
 @code {
+    private string? searchTerm { get; set; }
 
-     private string? customerName { get; set; }
+    private IEnumerable<string> filteredCities => string.IsNullOrEmpty(searchTerm)
+        ? Cities
+        : Cities.Where(city => city.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
 
-     [Parameter] public IEnumerable<string>? Cities { get; set; } = ServersRepository.GetServres().Select(a => a.City).Distinct().ToList()!;
+    [Parameter]
+    public IEnumerable<string>? Cities { get; set; } = ServersRepository.GetServres()
+        .Select(server => server.City)
+        .Distinct()
+        .ToList()!;
 
     [Parameter] public EventCallback<string> SelectName { get; set; }
 
-
-
-    private async Task<AutoCompleteDataProviderResult<string>> CityDataProvider(AutoCompleteDataProviderRequest<string> request)
+    private async Task OnSearchInput(ChangeEventArgs e)
     {
-        Cities =  Cities ?? ServersRepository.GetServres().Select(a => a.City).Distinct().ToList()!;
-        return await Task.FromResult(request.ApplyTo(Cities!));
+        searchTerm = e.Value?.ToString();
+        Console.WriteLine($"'{searchTerm}' selected.");
+        await SelectName.InvokeAsync(searchTerm);
+        await Task.CompletedTask; 
     }
 
-   
-
-    private async Task OnAutoCompleteChanged(string customer)
+    private async Task OnCitySelected(string city)
     {
+        Console.WriteLine($"'{city}' selected.");
+        searchTerm = city; 
+        await SelectName.InvokeAsync(city);
+    }
 
-        Console.WriteLine($"'{customer}' selected.");
-        await SelectName.InvokeAsync(customer);
+    public void Clear()
+    {
+        searchTerm = String.Empty;
     }
 
 }

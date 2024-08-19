@@ -17,13 +17,14 @@
      [Parameter]
     public string? CityName { get; set; }
 
-    [Parameter] public string SearchSorting { get; set; }
+    [Parameter] public string? SearchSorting { get; set; }
 
      private List<Server> Servers { get; set; } = ServersRepository.GetServres();
 
 
      protected override void OnParametersSet()
      {
+         Console.WriteLine(CityName);
          Servers = CityName is null or "" ? ServersRepository.GetServres() : ServersRepository.GetServersByCity(CityName);
         // Console.WriteLine(SearchSorting +"is the search poaram");
          if (SearchSorting is not null or "")
